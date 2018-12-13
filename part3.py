@@ -7,9 +7,9 @@ arrowL = cv2.imread('left_arrow.jpg')
 arrowR = cv2.imread('right_arrow.jpg')
 star = cv2.imread('star.jpg')
 
-template_arrowL = cv2.resize(arrowL, (0,0), fx=0.4, fy=0.4) 
-template_arrowR = cv2.resize(arrowR, (0,0), fx=0.4, fy=0.4) 
-template_star = cv2.resize(star, (0,0), fx=0.4, fy=0.4) 
+template_arrowL = cv2.resize(arrowL, (0,0), fx=0.3, fy=0.3) 
+template_arrowR = cv2.resize(arrowR, (0,0), fx=0.3, fy=0.3) 
+template_star = cv2.resize(star, (0,0), fx=0.3, fy=0.3) 
 
 gray_left = cv2.cvtColor(template_arrowL,cv2.COLOR_BGR2GRAY)
 gray_right = cv2.cvtColor(template_arrowR,cv2.COLOR_BGR2GRAY)
@@ -45,7 +45,7 @@ class Follower:
     mask_yellow[search_bot:h, 0:w] = 0
     Y = cv2.moments(mask_yellow)
 
-    top_red = (6*h/7)+6
+    top_red = (6 * h / 7)+6
     bot_red = top_red + 20
     mid = w / 2
     mask_red[0:top_red, 0:w] = 0
@@ -72,7 +72,7 @@ class Follower:
             # print("min_valS: ", min_valS)
 
             if min_valL < -0.81 and min_valL < min_valR and min_valS > -0.05: 
-                #print("Turning left")
+                #print("LEFT")
                 self.twist.linear.x = .45
                 self.twist.angular.z = 0.3
                 self.cmd_vel_pub.publish(self.twist)
@@ -80,7 +80,7 @@ class Follower:
                 self.twist.angular.z = 0.3
             
             elif min_valR < -0.81 and min_valR < min_valL and min_valS > -0.05:
-                #print("Turning right")
+                #print("RIGHT")
                 self.twist.linear.x = .45
                 self.twist.angular.z = -0.2
                 self.cmd_vel_pub.publish(self.twist)
@@ -89,7 +89,7 @@ class Follower:
                 self.cmd_vel_pub.publish(self.twist)
             
             elif min_valS < -0.05 and min_valL < -0.81 and min_valR < -0.83:
-                #print("Stopping")
+                #print("STOP")
                 self.stop = True 
                 for i in range(0,150):
                   print(i)
