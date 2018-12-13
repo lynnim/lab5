@@ -3,9 +3,9 @@ import rospy, cv2, cv_bridge, numpy
 from sensor_msgs.msg import Image
 from geometry_msgs.msg import Twist
 
-arrowL = cv2.imread('left_arrow.jpg')
-arrowR = cv2.imread('right_arrow.jpg')
-star = cv2.imread('star.jpg')
+arrowL = cv2.imread('/img/left_arrow.jpg')
+arrowR = cv2.imread('/img/right_arrow.jpg')
+star = cv2.imread('/img/star.jpg')
 
 template_arrowL = cv2.resize(arrowL, (0,0), fx=0.5, fy=0.5) 
 template_arrowR = cv2.resize(arrowR, (0,0), fx=0.4, fy=0.4) 
