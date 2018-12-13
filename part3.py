@@ -67,9 +67,9 @@ class Follower:
             min_valR, max_valR, min_loc, max_loc = cv2.minMaxLoc(res_arrowR)
             min_valS, max_valS, min_loc, max_loc = cv2.minMaxLoc(res_star)
 
-            # print("min_valL: ", min_valL)
-            # print("min_valR: ", min_valR)
-            # print("min_valS: ", min_valS)
+            print("min_valL: ", min_valL)
+            print("min_valR: ", min_valR)
+            print("min_valS: ", min_valS)
 
             if min_valL < -0.81 and min_valL < min_valR and min_valS > -0.05: 
                 #print("LEFT")
