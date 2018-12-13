@@ -98,8 +98,7 @@ class Follower:
           if self.stop:
               #print("stopping")
               for i in range(0,130):
-                  print(i)
-                  self.twist.linear.x = 1
+                  self.twist.linear.x = 3
                   self.twist.angular.z = -1
                   self.cmd_vel_pub.publish(self.twist)
 
