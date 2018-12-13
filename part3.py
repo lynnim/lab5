@@ -7,7 +7,7 @@ arrowL = cv2.imread('/img/left_arrow.jpg')
 arrowR = cv2.imread('/img/right_arrow.jpg')
 star = cv2.imread('/img/star.jpg')
 
-template_arrowL = cv2.resize(arrowL, (0,0), fx=0.5, fy=0.5) 
+template_arrowL = cv2.resize(arrowL, (0,0), fx=0.4, fy=0.4) 
 template_arrowR = cv2.resize(arrowR, (0,0), fx=0.4, fy=0.4) 
 template_star = cv2.resize(star, (0,0), fx=0.4, fy=0.4) 
 
