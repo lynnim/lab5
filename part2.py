@@ -66,7 +66,6 @@ class Follower:
       if G['m00'] > 0:
         cx_green = int(G['m10'] / G['m00'])
         cy_green = int(G['m01'] / G['m00'])
-        #cv2.circle(image, (cx_green, cy_green), 6, (0, 225, 0), -1)
         cv2.circle(image, (cx_green, cy_green), 6, (0, 0, 255), -1)
         #print("LEFT")
         self.twist.linear.x = .45
@@ -77,7 +76,6 @@ class Follower:
         cx_blue = int(B['m10'] / B['m00'])
         cy_blue = int(B['m01'] / B['m00'])
         cv2.circle(image, (cx_blue, cy_blue), 6, (0, 0, 255), -1)
-        #cv2.circle(image, (cx_blue, cy_blue), 6, (225, 0, 0), -1)
         #print("RIGHT")
         self.twist.linear.x = .45
         self.twist.angular.z = -0.2
@@ -96,8 +94,7 @@ class Follower:
 
       else:
           if self.stop:
-              #print("stopping")
-              for i in range(0,130):
+              for i in range(0,150):
                   self.twist.linear.x = 3
                   self.twist.angular.z = -1
                   self.cmd_vel_pub.publish(self.twist)
@@ -109,7 +106,6 @@ class Follower:
               cx = int(Y['m10'] / Y['m00'])
               cy = int(Y['m01'] / Y['m00'])
               cv2.circle(image, (cx, cy), 6, (0, 0, 225), -1)
-              #cv2.circle(image, (cx, cy), 6, (2, 166, 249), -1)
               err = cx - w / 2
               self.twist.linear.x = 0.55
               self.twist.angular.z = -float(err) / 100
