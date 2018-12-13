@@ -57,7 +57,7 @@ class Follower:
     G = cv2.moments(mask_green)
 
     top_blue = 4 * h / 5
-    bot_blue = b_top + 30
+    bot_blue = top_blue + 30
     mask_blue[0:top_blue, 0:w] = 0
     mask_blue[bot_blue:h, 0:w] = 0
     B = cv2.moments(mask_blue)
