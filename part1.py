@@ -21,26 +21,22 @@ class Follower:
     mask = cv2.inRange(hsv, lower_yellow, upper_yellow)
     
     h, w, d = image.shape
-    search_top = 5*h/6 #put the frame 5/6 of the way down
-    search_bot = search_top + 20 #use the 20 units in front of the robot from that 5/6 of the way down
+    search_top = 5*h/6 
+    search_bot = search_top + 20 
     mask[0:search_top, 0:w] = 0
     mask[search_bot:h, 0:w] = 0
     M = cv2.moments(mask)
     if M['m00'] > 0:
-      #calculate the centriod
       cx = int(M['m10']/M['m00'])
       cy = int(M['m01']/M['m00'])
       cv2.circle(image, (cx, cy), 6, (0,0,255), -1)
-      # BEGIN CONTROL
       err = cx - w/2
       self.twist.linear.x = 0.2
       self.twist.angular.z = -float(err) / 100
       self.cmd_vel_pub.publish(self.twist)
-      # END CONTROL
     cv2.imshow("window", image)
     cv2.waitKey(3)
 
 rospy.init_node('follower')
 follower = Follower()
 rospy.spin()
-# END ALL
