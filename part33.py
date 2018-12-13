@@ -71,7 +71,7 @@ class Follower:
             print("min_valR: ", min_valR)
             print("min_valS: ", min_valS)
 
-            if min_valL < -0.81 and min_valL < min_valR and min_valS > -0.05: 
+            if min_valL > -0.45 and min_valL > min_valR and min_valS > -0.05: 
                 print("LEFT")
                 self.twist.linear.x = .45
                 self.twist.angular.z = 0.3
