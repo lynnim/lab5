@@ -104,20 +104,20 @@ class Follower:
             #     self.twist.linear.x = 0.3
             #     self.cmd_vel_pub.publish(self.twist)
 
+    else:
+        if not self.STOP:
+            cx = int(Y['m10'] / Y['m00'])
+            cy = int(Y['m01'] / Y['m00'])
+            cv2.circle(image, (cx, cy), 6, (0,0,255), -1)
+            err = cx - w / 2
+            self.twist.linear.x = 0.2
+            self.twist.angular.z = -float(err) / 100
+            self.cmd_vel_pub.publish(self.twist)
         else:
-            if not self.STOP:
-                cx = int(Y['m10'] / Y['m00'])
-                cy = int(Y['m01'] / Y['m00'])
-                cv2.circle(image, (cx, cy), 6, (0,0,255), -1)
-                err = cx - w / 2
-                self.twist.linear.x = 0.2
-                self.twist.angular.z = -float(err) / 100
-                self.cmd_vel_pub.publish(self.twist)
-            else:
-                print("MOVING FORWARD")
-                self.twist.linear.x = 0
-                self.twist.angular.z = 0
-                self.cmd_vel_pub.publish(self.twist)
+            print("MOVING FORWARD")
+            self.twist.linear.x = 0
+            self.twist.angular.z = 0
+            self.cmd_vel_pub.publish(self.twist)
 
     cv2.imshow("window", image)
     cv2.waitKey(3)
