@@ -18,9 +18,9 @@ Take [H-10, 100, 100] and [H-10, 255, 255] as lower and upper bounds, respective
 """
 
 # Get template images 
-right_triangle = cv2.imread('/home/kathleenlee/catkin_ws/src/followbot/imgs/right-triangle.jpg')
-left_triangle = cv2.imread('/home/kathleenlee/catkin_ws/src/followbot/imgs/left-triangle.jpg')
-star = cv2.imread('/home/kathleenlee/catkin_ws/src/followbot/imgs/triangle-up.jpg')
+right_triangle = cv2.imread('right-triangle.jpg')
+left_triangle = cv2.imread('left-triangle.jpg')
+star = cv2.imread('triangle-up.jpg')
 
 templateL = cv2.resize(left_triangle, (0,0), fx=0.5, fy=0.5) 
 templateR = cv2.resize(right_triangle, (0,0), fx=0.4, fy=0.4) 
