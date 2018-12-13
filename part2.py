@@ -76,7 +76,7 @@ class Follower:
       elif B['m00'] > 0:
         cx_blue = int(B['m10'] / B['m00'])
         cy_blue = int(B['m01'] / B['m00'])
-        cv2.circle(image, (cx_green, cy_green), 6, (0, 0, 255), -1)
+        cv2.circle(image, (cx_blue, cy_blue), 6, (0, 0, 255), -1)
         #cv2.circle(image, (cx_blue, cy_blue), 6, (225, 0, 0), -1)
         #print("RIGHT")
         self.twist.linear.x = .45
