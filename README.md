@@ -33,3 +33,5 @@ To run the python script for part 3
 python part3.py
 
 ```
+### Video
+[Watch Part I, II, III Demo Here](https://www.youtube.com/watch?v=cQQ3Jp61-Gk&feature=youtu.be)
