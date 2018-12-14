@@ -21,6 +21,7 @@ To run the python script for part 2
 
 ```
 python part2.py
+```
 
 To launch turtlebot and map for part 3
 ```
@@ -30,6 +31,5 @@ To run the python script for part 3
 
 ```
 python part3.py
-
 
 ```
