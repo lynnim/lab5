@@ -5,14 +5,13 @@ from sensor_msgs.msg import Image
 from geometry_msgs.msg import Twist
 
 # Get template images 
-right_triangle = cv2.imread('right-triangle.jpg')
-left_triangle = cv2.imread('left-triangle.jpg')
-star = cv2.imread('triangle-up.jpg')
+right_triangle = cv2.imread('right1.png')
+left_triangle = cv2.imread('left1.png')
+star = cv2.imread('star1.png')
 
 templateL = cv2.resize(left_triangle, (0,0), fx=0.5, fy=0.5) 
 templateR = cv2.resize(right_triangle, (0,0), fx=0.4, fy=0.4) 
 templateS = cv2.resize(star, (0,0), fx=0.4, fy=0.4) 
-
 
 grayR = cv2.cvtColor(templateR,cv2.COLOR_BGR2GRAY)
 grayL = cv2.cvtColor(templateL,cv2.COLOR_BGR2GRAY)
@@ -78,13 +77,14 @@ class Follower:
             print("min_valR: ", min_valR)
             print("min_valS: ", min_valS)
 
-            if min_valL < -0.81 and min_valL < min_valR and min_valS > -0.05: 
+            if min_valL < -0.43 and min_valL > min_valR and min_valS > -0.05: 
                 print("Turning left")
                 self.twist.linear.x = .45
                 self.twist.angular.z = 0.3
                 self.cmd_vel_pub.publish(self.twist)
                 self.twist.linear.x = .45
                 self.twist.angular.z = 0.3
+
             elif min_valR < -0.81 and min_valR < min_valL and min_valS > -0.05:
                 print("Turning right")
                 self.twist.linear.x = .45
@@ -93,6 +93,7 @@ class Follower:
                 self.twist.linear.x = .45
                 self.twist.angular.z = -0.2
                 self.cmd_vel_pub.publish(self.twist)
+
             elif min_valS < -0.05 and min_valL < -0.81 and min_valR < -0.83:
                 print("Stopping")
                 self.stop = True 
@@ -101,7 +102,6 @@ class Follower:
                   self.twist.linear.x = 1
                   self.twist.angular.z = -1
                   self.cmd_vel_pub.publish(self.twist)
-
                 self.twist.linear.x = 1
                 self.twist.angular.z = 0
                 self.cmd_vel_pub.publish(self.twist)
