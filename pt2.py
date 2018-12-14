@@ -22,7 +22,7 @@ class Follower:
 
     lower_red = numpy.array([0, 100, 100])
     upper_red = numpy.array([10, 255, 255])
-    mask_red = cv2.inRange(hsv, lower_red, upper_red)
+    r_mask = cv2.inRange(hsv, lower_red, upper_red)
 
     h, w, d = image.shape
 
