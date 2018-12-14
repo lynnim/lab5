@@ -75,7 +75,6 @@ class Follower:
 
             if min_valL < -0.42 and min_valL > min_valR and -0.48 < min_valS < -0.4: 
                 print("LEFT")
-                print(min_valS)
                 self.twist.linear.x = .45
                 self.twist.angular.z = 0.3
                 self.cmd_vel_pub.publish(self.twist)
@@ -84,7 +83,6 @@ class Follower:
 
             elif min_valR < -0.4 and min_valR > min_valL and -0.49 < min_valS < -0.44:
                 print("RIGHT")
-                print(min_valS)
                 self.twist.linear.x = .45
                 self.twist.angular.z = -0.2
                 self.cmd_vel_pub.publish(self.twist)
@@ -94,7 +92,6 @@ class Follower:
 
             elif -0.43 < min_valS < -0.38 and min_valL < -0.42 and min_valR < -0.42:
                 print("STOP")
-                print(min_valS)
                 self.stop = True 
                 for i in range(0,150):
                   print(i)
@@ -109,7 +106,7 @@ class Follower:
                 self.cmd_vel_pub.publish(self.twist)
         else:
             if not self.stop:
-                print("follow yellow")
+                #print("follow yellow")
                 cx = int(Y['m10'] / Y['m00'])
                 cy = int(Y['m01'] / Y['m00'])
                 cv2.circle(image, (cx, cy), 20, (2, 166, 249), -1)
