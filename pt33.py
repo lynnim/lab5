@@ -62,7 +62,6 @@ class Follower:
     imgGray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
     if Y['m00'] > 0 and not self.stop:
-
         if R['m00'] > 0 and not self.stop: 
             resL = cv2.matchTemplate(imgGray,grayL,cv2.TM_CCOEFF_NORMED)
             resR = cv2.matchTemplate(imgGray,grayR,cv2.TM_CCOEFF_NORMED)
@@ -110,23 +109,17 @@ class Follower:
             #     self.cmd_vel_pub.publish(self.twist)
                 # END CONTROL
         else:
-            if not self.stop:
-                print("follow yellow")
-                #calculate the centriod
-                cx = int(Y['m10'] / Y['m00'])
-                cy = int(Y['m01'] / Y['m00'])
-                cv2.circle(image, (cx, cy), 20, (2, 166, 249), -1)
-                # BEGIN CONTROL
-                err = cx - w / 2
-                self.twist.linear.x = 0.2
-                self.twist.angular.z = -float(err) / 100
-                self.cmd_vel_pub.publish(self.twist)
-                # END CONTROL
-            else:
-                self.twist.linear.x = 0
-                self.twist.angular.z = 0
-                self.cmd_vel_pub.publish(self.twist)
-
+            print("follow yellow")
+            #calculate the centriod
+            cx = int(Y['m10'] / Y['m00'])
+            cy = int(Y['m01'] / Y['m00'])
+            cv2.circle(image, (cx, cy), 20, (2, 166, 249), -1)
+            # BEGIN CONTROL
+            err = cx - w / 2
+            self.twist.linear.x = 0.2
+            self.twist.angular.z = -float(err) / 100
+            self.cmd_vel_pub.publish(self.twist)
+            # END CONTROL
     cv2.imshow("window", image)
     cv2.waitKey(3)
 
