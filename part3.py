@@ -109,7 +109,7 @@ class Follower:
                 #print("follow yellow")
                 cx = int(Y['m10'] / Y['m00'])
                 cy = int(Y['m01'] / Y['m00'])
-                cv2.circle(image, (cx, cy), 20, (2, 166, 249), -1)
+                cv2.circle(image, (cx, cy), 6, (0, 0, 255), -1)
                 err = cx - w / 2
                 self.twist.linear.x = 0.2
                 self.twist.angular.z = -float(err) / 100
