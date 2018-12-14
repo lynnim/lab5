@@ -63,9 +63,9 @@ class Follower:
             left_res = cv2.matchTemplate(img_gray,left_gray,cv2.TM_CCOEFF_NORMED)
             star_res = cv2.matchTemplate(img_gray,star_gray,cv2.TM_CCOEFF_NORMED)
     
-            min_valL, max_valL, min_loc, max_loc = cv2.minMaxLoc(resL)
-            min_valR, max_valR, min_loc, max_loc = cv2.minMaxLoc(resR)
-            min_valS, max_valS, min_loc, max_loc = cv2.minMaxLoc(resS)
+            min_valL, max_valL, min_loc, max_loc = cv2.minMaxLoc(left_res)
+            min_valR, max_valR, min_loc, max_loc = cv2.minMaxLoc(right_res)
+            min_valS, max_valS, min_loc, max_loc = cv2.minMaxLoc(star_res)
 
             # print("min_valL: ", min_valL)
             # print("min_valR: ", min_valR)
