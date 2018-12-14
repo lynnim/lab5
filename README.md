@@ -35,7 +35,15 @@ python part3.py
 ```
 
 ### Method
+### Method
+Part I:
+- `image_callback()`: the robot follows the yellow track nonstop. 
+
+Part II:
+-`image_callback()`: The robot follows the track when yellow color is read. he robot turns left when the green color is read. The robot turns right when the blue color is read. Finally, the robot stops when the red color is read. 
+
 Part III:
 -`image_callback()`: performs template matching to detech each shape. The robot follows the yellow track when not reading images or detecting red color. The robot turns left when the left arrow image is detected. The robot turns right when the right arrow image is detected. The robot stops when the star image is detected. 
+
 ### Video
 [Watch Part I, II, III Demo Here](https://www.youtube.com/watch?v=cQQ3Jp61-Gk&feature=youtu.be)
