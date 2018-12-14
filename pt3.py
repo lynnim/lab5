@@ -90,7 +90,8 @@ class Follower:
                 self.twist.angular.z = -0.2
                 self.cmd_vel_pub.publish(self.twist)
 
-            elif -0.43 < min_valS < -0.38 and min_valL < -0.42 and min_valR < -0.4:
+            # elif -0.43 < min_valS < -0.38 and min_valL < -0.42 and min_valR < -0.4:
+            elif -0.43 < min_valS < -0.38:
                 print("STOP")
                 self.stop = True 
                 for i in range(0,150):
