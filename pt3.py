@@ -4,7 +4,6 @@ import rospy, cv2, cv_bridge, numpy
 from sensor_msgs.msg import Image
 from geometry_msgs.msg import Twist
 
-# Get template images 
 right_triangle = cv2.imread('right1.png')
 left_triangle = cv2.imread('left1.png')
 star = cv2.imread('star1.png')
@@ -47,7 +46,6 @@ class Follower:
     y_mask[search_bot:h, 0:w] = 0
     Y = cv2.moments(y_mask)
 
-    #for the red
     r_top = (6*h/7)+6
     r_bot = r_top + 20
     mid = w / 2
@@ -57,7 +55,6 @@ class Follower:
     r_mask[0:h, mid+10:w] = 0
     R = cv2.moments(r_mask)
 
-    # Resize image 
     img = cv2.resize(image, (0,0), fx=0.5, fy=0.5)
     imgGray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
@@ -68,7 +65,6 @@ class Follower:
             resR = cv2.matchTemplate(imgGray,grayR,cv2.TM_CCOEFF_NORMED)
             resS = cv2.matchTemplate(imgGray,grayStar,cv2.TM_CCOEFF_NORMED)
     
-            # Store the coordinates of matched area in a numpy array 
             min_valL, max_valL, min_loc, max_loc = cv2.minMaxLoc(resL)
             min_valR, max_valR, min_loc, max_loc = cv2.minMaxLoc(resR)
             min_valS, max_valS, min_loc, max_loc = cv2.minMaxLoc(resS)
@@ -94,8 +90,8 @@ class Follower:
                 self.twist.angular.z = -0.2
                 self.cmd_vel_pub.publish(self.twist)
 
-            elif min_valS < -0.3 and min_valL < -0.42 and min_valR < -0.4:
-                print("Stopping")
+            elif -0.43 < min_valS < -0.38 and min_valL < -0.42 and min_valR < -0.4:
+                print("STOP")
                 self.stop = True 
                 for i in range(0,150):
                   print(i)
@@ -106,23 +102,18 @@ class Follower:
                 self.twist.angular.z = 0
                 self.cmd_vel_pub.publish(self.twist)
             else:
-                print("Moved forward a bit")
                 self.twist.linear.x = 0.3
                 self.cmd_vel_pub.publish(self.twist)
-                # END CONTROL
         else:
             if not self.stop:
                 print("follow yellow")
-                #calculate the centriod
                 cx = int(Y['m10'] / Y['m00'])
                 cy = int(Y['m01'] / Y['m00'])
                 cv2.circle(image, (cx, cy), 20, (2, 166, 249), -1)
-                # BEGIN CONTROL
                 err = cx - w / 2
                 self.twist.linear.x = 0.2
                 self.twist.angular.z = -float(err) / 100
                 self.cmd_vel_pub.publish(self.twist)
-                # END CONTROL
             else:
                 self.twist.linear.x = 0
                 self.twist.angular.z = 0
