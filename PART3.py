@@ -47,7 +47,7 @@ class Follower:
     Y = cv2.moments(mask_yellow)
 
     red_top = (6*h/7)+6
-    red_bot = r_top + 20
+    red_bot = red_top + 20
     mid = w / 2
     mask_red[0:red_top, 0:w] = 0
     mask_red[red_bot:h, 0:w] = 0
