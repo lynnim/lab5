@@ -36,6 +36,6 @@ python part3.py
 
 ### Method
 Part III:
--`image_callback()`: performs template matching to detech each shape. The robot follows the yellow track when not at an intersection. The robot turns left when the left arrow image is detected. The robot turns right when the right arrow image is detected. The robot stops when the star image is detected. 
+-`image_callback()`: performs template matching to detech each shape. The robot follows the yellow track when not reading images or detecting red color. The robot turns left when the left arrow image is detected. The robot turns right when the right arrow image is detected. The robot stops when the star image is detected. 
 ### Video
 [Watch Part I, II, III Demo Here](https://www.youtube.com/watch?v=cQQ3Jp61-Gk&feature=youtu.be)
