@@ -77,16 +77,16 @@ class Follower:
             print("min_valR: ", min_valR)
             print("min_valS: ", min_valS)
 
-            if min_valL < -0.43 and min_valL > min_valR and min_valS < -0.05: 
-                print("Turning left")
+            if min_valL < -0.42 and min_valL > min_valR and min_valS > -0.5: 
+                print("LEFT")
                 self.twist.linear.x = .45
                 self.twist.angular.z = 0.3
                 self.cmd_vel_pub.publish(self.twist)
                 self.twist.linear.x = .45
                 self.twist.angular.z = 0.3
 
-            elif min_valR < -0.43 and min_valR > min_valL and min_valS < -0.05:
-                print("Turning right")
+            elif min_valR < -0.4 and min_valR > min_valL and min_valS > -0.5:
+                print("RIGHT")
                 self.twist.linear.x = .45
                 self.twist.angular.z = -0.2
                 self.cmd_vel_pub.publish(self.twist)
@@ -94,7 +94,7 @@ class Follower:
                 self.twist.angular.z = -0.2
                 self.cmd_vel_pub.publish(self.twist)
 
-            elif min_valS < -0.05 and min_valL < -0.81 and min_valR < -0.83:
+            elif min_valS < -0.3 and min_valL < -0.42 and min_valR < -0.4:
                 print("Stopping")
                 self.stop = True 
                 for i in range(0,150):
@@ -106,7 +106,7 @@ class Follower:
                 self.twist.angular.z = 0
                 self.cmd_vel_pub.publish(self.twist)
             else:
-                print("Moved foward a bit ")
+                print("Moved forward a bit")
                 self.twist.linear.x = 0.3
                 self.cmd_vel_pub.publish(self.twist)
                 # END CONTROL
