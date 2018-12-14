@@ -4,19 +4,6 @@ import rospy, cv2, cv_bridge, numpy
 from sensor_msgs.msg import Image
 from geometry_msgs.msg import Twist
 
-
-"""
-Yellow
-[[[ 29 191 171]]]
-Blue
-[[[120 255 169]]]
-Red
-[[[  0 229 164]]]
-Green
-[[[ 60 193 169]]]
-Take [H-10, 100, 100] and [H-10, 255, 255] as lower and upper bounds, respectively 
-"""
-
 # Get template images 
 right_triangle = cv2.imread('right-triangle.jpg')
 left_triangle = cv2.imread('left-triangle.jpg')
@@ -26,19 +13,10 @@ templateL = cv2.resize(left_triangle, (0,0), fx=0.5, fy=0.5)
 templateR = cv2.resize(right_triangle, (0,0), fx=0.4, fy=0.4) 
 templateS = cv2.resize(star, (0,0), fx=0.4, fy=0.4) 
 
-# Get countour of images 
+
 grayR = cv2.cvtColor(templateR,cv2.COLOR_BGR2GRAY)
 grayL = cv2.cvtColor(templateL,cv2.COLOR_BGR2GRAY)
 grayStar = cv2.cvtColor(templateS,cv2.COLOR_BGR2GRAY)
-# ret, threshR = cv2.threshold(grayR, 127, 255,0)
-# ret, threshL = cv2.threshold(grayL, 127, 255,0)
-# ret, threshS = cv2.threshold(grayStar, 127, 255,0)
-# contoursR,hierarchy = cv2.findContours(threshR,2,1)
-# cntR = contoursR[0]
-# contoursL,hierarchy = cv2.findContours(threshL,2,1)
-# cntL = contoursL[0]
-# contoursS,hierarchy = cv2.findContours(threshS,2,1)
-#cntS = contoursS[0]
 
 class Follower:
   def __init__(self):
@@ -63,11 +41,8 @@ class Follower:
     upper_red = numpy.array([10, 255, 255])
     r_mask = cv2.inRange(hsv, lower_red, upper_red)
 
-    #for the yellow
-    search_top = 5 * h / 6  # put the frame 5/6 of the way down
-    search_bot = search_top + 20  # use the 20 units in front of the robot from that 5/6 of the way down
-    #search_top = 7 * h / 8  # put the frame 5/6 of the way down
-    #search_bot = search_top + 10  # use the 20 units in front of the robot from that 5/6 of the way down
+    search_top = 5 * h / 6  
+    search_bot = search_top + 20  
     mid = w/2
     y_mask[0:search_top, 0:w] = 0
     y_mask[search_bot:h, 0:w] = 0
@@ -77,8 +52,6 @@ class Follower:
     r_top = (6*h/7)+6
     r_bot = r_top + 20
     mid = w / 2
-    #r_top = 4 * h / 5
-    #r_bot = r_top + 40
     r_mask[0:r_top, 0:w] = 0
     r_mask[r_bot:h, 0:w] = 0
     r_mask[0:h, 0:mid-10] = 0
@@ -88,10 +61,7 @@ class Follower:
     # Resize image 
     img = cv2.resize(image, (0,0), fx=0.5, fy=0.5)
     imgGray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    # ret, imgThres = cv2.threshold(imgGray, 127, 255, 0)
-    # imgCon, hierarchy = cv2.findContours(imgThres, 2, 1)
-    # cntI = imgCon
- 
+
     if Y['m00'] > 0 and not self.stop:
 
         if R['m00'] > 0 and not self.stop: 
