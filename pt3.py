@@ -69,20 +69,22 @@ class Follower:
             min_valR, max_valR, min_loc, max_loc = cv2.minMaxLoc(resR)
             min_valS, max_valS, min_loc, max_loc = cv2.minMaxLoc(resS)
 
-            print("min_valL: ", min_valL)
-            print("min_valR: ", min_valR)
-            print("min_valS: ", min_valS)
+            # print("min_valL: ", min_valL)
+            # print("min_valR: ", min_valR)
+            # print("min_valS: ", min_valS)
 
-            if min_valL < -0.42 and min_valL > min_valR and min_valS > -0.5: 
+            if min_valL < -0.42 and min_valL > min_valR and -0.48 < min_valS < -0.4: 
                 print("LEFT")
+                print(min_valS)
                 self.twist.linear.x = .45
                 self.twist.angular.z = 0.3
                 self.cmd_vel_pub.publish(self.twist)
                 self.twist.linear.x = .45
                 self.twist.angular.z = 0.3
 
-            elif min_valR < -0.4 and min_valR > min_valL and min_valS > -0.5:
+            elif min_valR < -0.4 and min_valR > min_valL and -0.49 < min_valS < -0.44:
                 print("RIGHT")
+                print(min_valS)
                 self.twist.linear.x = .45
                 self.twist.angular.z = -0.2
                 self.cmd_vel_pub.publish(self.twist)
@@ -90,9 +92,9 @@ class Follower:
                 self.twist.angular.z = -0.2
                 self.cmd_vel_pub.publish(self.twist)
 
-            # elif -0.43 < min_valS < -0.38 and min_valL < -0.42 and min_valR < -0.4:
-            elif -0.43 < min_valS < -0.38:
+            elif -0.43 < min_valS < -0.38 and min_valL < -0.42 and min_valR < -0.42:
                 print("STOP")
+                print(min_valS)
                 self.stop = True 
                 for i in range(0,150):
                   print(i)
